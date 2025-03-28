@@ -1,18 +1,17 @@
 /*
- * Clase de products donde van todos los elementos de los productos.
+ * Clase de productos donde van todos los elementos de los productos.
  */
-
 public class Products {
     private int SKU;
     private String name;
     private String description;
-    private String cantpersize;
+    private String cantPerSize;
 
-    public Products(int SKU, String name, String description, String cantpersize) {
+    public Products(int SKU, String name, String description, String cantPerSize) {
         this.SKU = SKU;
         this.name = name;
         this.description = description;
-        this.cantpersize = cantpersize;
+        this.cantPerSize = cantPerSize;
     }
 
     public int getSKU() {
@@ -39,12 +38,16 @@ public class Products {
         this.description = description;
     }
 
-    public String getCantpersize() {
-        return cantpersize;
+    public String getCantPerSize() {
+        return cantPerSize;
     }
 
-    public void setCantpersize(String cantpersize) {
-        this.cantpersize = cantpersize;
+    public void setCantPerSize(String cantPerSize) {
+        this.cantPerSize = cantPerSize;
     }
 
+    @Override
+    public String toString() {
+        return "SKU: " + SKU + ", Name: " + name + ", Description: " + description + ", Sizes: " + cantPerSize;
+    }
 }
