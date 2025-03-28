@@ -5,9 +5,9 @@
 public class Factory {
     public static BinaryTree<String, Products> createBinaryTree(String keyType) {
         switch (keyType.toLowerCase()) {
-            case "SKU":
+            case "sku":
                 return new BinaryTree<>();
-            case "Name":
+            case "name":
                 return new BinaryTree<>();
             default:
                 throw new IllegalArgumentException("Ingrese una opción correcta");
