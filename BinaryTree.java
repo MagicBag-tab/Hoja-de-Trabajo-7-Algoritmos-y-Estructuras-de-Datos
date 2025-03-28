@@ -3,16 +3,14 @@
  * Link: https://www.cs.williams.edu/~bailey/JavaStructures/Book_files/JavaStructures.pdf
  * en la pág: 284 The BinaryTreeImplementation adaptado a la estructura de <K, V>
  */
-public class BinaryTree<K extends Comparable<K>, V> {
 
+import java.util.Iterator;
+
+public class BinaryTree<K extends Comparable<K>, V> {
     protected K key;
     protected V value;
     protected BinaryTree<K, V> parent;
     protected BinaryTree<K, V> left, right;
-
-    /*
-     * Constructor vacío para un árbol vacío
-     */
 
     public BinaryTree() {
         key = null;
@@ -21,10 +19,9 @@ public class BinaryTree<K extends Comparable<K>, V> {
         left = right = this;
     }
 
-    /*
-     * Constructor con clave y con valor
-     */
     public BinaryTree(K key, V value) {
+        if (key == null)
+            throw new IllegalArgumentException("La clave no puede ser nula");
         this.key = key;
         this.value = value;
         this.left = new BinaryTree<>();
@@ -61,10 +58,6 @@ public class BinaryTree<K extends Comparable<K>, V> {
         return parent;
     }
 
-    /*
-     * Crea un subárbol derecho
-     */
-
     public void setLeft(BinaryTree<K, V> newLeft) {
         if (isEmpty())
             return;
@@ -74,10 +67,6 @@ public class BinaryTree<K extends Comparable<K>, V> {
         if (left != null)
             left.setParent(this);
     }
-
-    /*
-     * Crea un subárbol izquierdo
-     */
 
     public void setRight(BinaryTree<K, V> newRight) {
         if (isEmpty())
@@ -95,10 +84,9 @@ public class BinaryTree<K extends Comparable<K>, V> {
         }
     }
 
-    /*
-     * Inserta un nuevo árbol de estructura <K, V>
-     */
     public void insert(K key, V value) {
+        if (key == null)
+            throw new IllegalArgumentException("La clave no puede ser nula");
         if (isEmpty()) {
             this.key = key;
             this.value = value;
@@ -113,17 +101,13 @@ public class BinaryTree<K extends Comparable<K>, V> {
             } else if (compare > 0) {
                 right.insert(key, value);
             } else {
-                this.value = value;
+                this.value = value; // Actualiza si la clave ya existe
             }
         }
     }
 
-    /*
-     * Busca la llave dentro del arbol y retorna los valores
-     */
-
     public V search(K key) {
-        if (isEmpty())
+        if (isEmpty() || key == null)
             return null;
         int compare = key.compareTo(this.key);
         if (compare == 0) {
@@ -135,4 +119,7 @@ public class BinaryTree<K extends Comparable<K>, V> {
         }
     }
 
+    public Iterator<K> iterator() {
+        return new InOrderIterator<>(this);
+    }
 }
